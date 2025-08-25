@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>マイアカウント | Travel AI Advisor</title>
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <link rel="stylesheet" href="assets/css/destination.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    .account-wrapper{max-width:1000px;margin:50px auto;padding:0 20px;}
+    .account-header{display:flex;flex-wrap:wrap;justify-content:space-between;gap:20px;align-items:center;margin-bottom:35px;}
+    .account-card{flex:1;min-width:260px;background:var(--card-bg);padding:25px 28px;border-radius:18px;box-shadow:var(--shadow);position:relative;overflow:hidden;}
+    .account-card h2{margin:0 0 10px;font-size:1.4rem;color:var(--text-primary);} 
+    .account-meta{font-size:.85rem;color:var(--text-secondary);} 
+    .logout-small{position:absolute;top:15px;right:15px;background:#ff4d67;color:#fff;border:none;padding:6px 12px;border-radius:8px;cursor:pointer;font-size:.7rem;} 
+    .section-title-mini{font-size:1.2rem;margin:40px 0 15px;display:flex;align-items:center;gap:8px;color:var(--text-primary);} 
+    .bookings-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:22px;} 
+    .booking-card{background:var(--card-bg);border-radius:16px;padding:18px 20px;box-shadow:0 4px 18px rgba(0,0,0,.08);display:flex;flex-direction:column;gap:8px;position:relative;} 
+    .booking-card h3{font-size:1.05rem;margin:0;color:var(--text-primary);} 
+    .booking-badge{position:absolute;top:14px;right:14px;background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;padding:4px 10px;border-radius:20px;font-size:.65rem;letter-spacing:.5px;} 
+    .empty-box{padding:40px;text-align:center;background:var(--card-bg);border-radius:16px;color:var(--text-secondary);box-shadow:var(--shadow);} 
+    .back-home{display:inline-flex;align-items:center;gap:6px;margin-top:35px;color:#667eea;font-weight:600;text-decoration:none;} 
+    .back-home:hover{text-decoration:underline;} 
+    .danger-btn{background:#ff4d67;color:#fff;border:none;padding:10px 16px;border-radius:10px;cursor:pointer;font-size:.8rem;} 
+    .actions-row{display:flex;gap:10px;margin-top:10px;} 
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="header-content">
+      <div>
+  <h1 class="logo"><i class="fas fa-user-circle"></i> アカウント</h1>
+  <p class="tagline">予約の管理</p>
+      </div>
+      <div class="auth-area"></div>
+    </div>
+  </header>
+  <main class="main">
+    <div class="account-wrapper">
+      <div class="account-header">
+        <div class="account-card" id="userCard">
+          <button class="logout-small" id="logoutMini">ログアウト</button>
+          <h2 id="userEmail">--</h2>
+          <div class="account-meta">登録日: <span id="userCreated">--</span></div>
+          <div class="account-meta">予約数: <span id="bookingCount">0</span></div>
+        </div>
+        <div class="account-card">
+          <h2><i class="fas fa-lightbulb"></i> ヒント</h2>
+          <div class="account-meta" id="tipsBox">まだ予約がありません。旅先を探して最初の予約をしましょう。</div>
+        </div>
+      </div>
+  <h3 class="section-title-mini"><i class="fas fa-suitcase-rolling"></i> 予約履歴</h3>
+      <div id="bookingsContainer"></div>
+  <a href="index.html" class="back-home"><i class="fas fa-arrow-left"></i> ホームへ戻る</a>
+    </div>
+  </main>
+  <script src="assets/js/auth.js"></script>
+  <script>
+    const user = authAPI.getCurrentUser();
+    if(!user){ window.location.href='login.html'; }
+
+    function formatDate(iso){ try { return new Date(iso).toLocaleString('vi-VN'); } catch(e){ return iso; } }
+
+    function renderBookings(){
+      const list = authAPI.getUserBookings(user.id);
+      document.getElementById('bookingCount').textContent = list.length;
+      const container = document.getElementById('bookingsContainer');
+  if(!list.length){ container.innerHTML = `<div class='empty-box'><i class="fas fa-box-open" style='font-size:2rem;margin-bottom:10px;'></i><br>予約はまだありません</div>`; return; }
+      container.innerHTML = `<div class='bookings-grid'>${list.map(b=>`
+        <div class='booking-card'>
+          <div class='booking-badge'>${b.plan || 'プラン'}</div>
+          <h3>${b.destination || b.title || '旅行'}</h3>
+          <div style='font-size:.75rem;color:var(--text-secondary);'>予約日時: ${formatDate(b.createdAt)}</div>
+          <div style='font-size:.8rem;'>出発日: <strong>${b.startDate || '-'}</strong></div>
+          <div style='font-size:.8rem;'>人数: <strong>${b.travelers || '-'}</strong></div>
+          <div style='font-size:.8rem;'>支払方法: <strong>${b.payment || '-'}</strong></div>
+          <div style='font-size:.85rem;margin-top:6px;color:#667eea;'>合計: ¥${(b.total||0).toLocaleString()}</div>
+        </div>`).join('')}</div>`;
+    }
+
+    document.getElementById('userEmail').textContent = user.email;
+    document.getElementById('userCreated').textContent = formatDate(user.createdAt);
+    document.getElementById('logoutMini').addEventListener('click', ()=>{ authAPI.logoutUser(); window.location.href='index.html'; });
+
+    renderBookings();
+  </script>
+</body>
+</html>

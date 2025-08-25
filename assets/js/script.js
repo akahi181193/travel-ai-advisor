@@ -276,25 +276,64 @@ function showHelp() {
 
 // ダークモード切り替え
 function toggleTheme() {
-    document.body.classList.toggle('dark-mode');
-    const isDark = document.body.classList.contains('dark-mode');
-    localStorage.setItem('darkMode', isDark);
+    const currentTheme = document.body.getAttribute('data-theme');
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    
+    document.body.setAttribute('data-theme', newTheme);
+    localStorage.setItem('darkMode', newTheme === 'dark');
     
     const themeIcon = document.querySelector('.theme-toggle i');
-    themeIcon.className = isDark ? 'fas fa-sun' : 'fas fa-moon';
+    const themeText = document.querySelector('.theme-toggle span');
+    
+    if (newTheme === 'dark') {
+        themeIcon.className = 'fas fa-sun';
+        if (themeText) themeText.textContent = 'ライトモード';
+    } else {
+        themeIcon.className = 'fas fa-moon';
+        if (themeText) themeText.textContent = 'ダークモード';
+    }
 }
 
 // ダークモードの初期化
 document.addEventListener('DOMContentLoaded', function() {
-    const savedTheme = localStorage.getItem('darkMode') === 'true';
-    if (savedTheme) {
-        document.body.classList.add('dark-mode');
-        document.querySelector('.theme-toggle i').className = 'fas fa-sun';
+    const savedThemeDark = localStorage.getItem('darkMode') === 'true';
+    const body = document.body;
+    const toggleBtn = document.querySelector('.theme-toggle');
+    const icon = toggleBtn ? toggleBtn.querySelector('i') : null;
+    const text = toggleBtn ? toggleBtn.querySelector('span') : null;
+
+    const applyTheme = (isDark) => {
+        body.setAttribute('data-theme', isDark ? 'dark' : 'light');
+        if (icon) icon.className = isDark ? 'fas fa-sun' : 'fas fa-moon';
+        if (text) text.textContent = isDark ? 'ライトモード' : 'ダークモード';
+    };
+
+    applyTheme(savedThemeDark);
+
+    if (toggleBtn) {
+        toggleBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            const isDark = body.getAttribute('data-theme') !== 'dark';
+            applyTheme(isDark);
+            localStorage.setItem('darkMode', isDark);
+        });
     }
-    
+
     // 初期プログレス設定
     updateProgress();
 });
 
-// テーマ切り替えボタンのイベントリスナー
-document.querySelector('.theme-toggle').addEventListener('click', toggleTheme);
+// 互換性: 古い inline onclick を呼んでも動くように (念のため)
+window.toggleTheme = function() {
+    const body = document.body;
+    const isDark = body.getAttribute('data-theme') !== 'dark';
+    body.setAttribute('data-theme', isDark ? 'dark' : 'light');
+    localStorage.setItem('darkMode', isDark);
+    const toggleBtn = document.querySelector('.theme-toggle');
+    if (toggleBtn) {
+        const icon = toggleBtn.querySelector('i');
+        const text = toggleBtn.querySelector('span');
+        if (icon) icon.className = isDark ? 'fas fa-sun' : 'fas fa-moon';
+        if (text) text.textContent = isDark ? 'ライトモード' : 'ダークモード';
+    }
+};

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ログイン | Travel AI Advisor</title>
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <link rel="stylesheet" href="assets/css/destination.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    .auth-wrapper{max-width:420px;margin:60px auto;background:var(--card-bg);padding:35px 40px;border-radius:20px;box-shadow:var(--shadow);backdrop-filter:blur(10px);} 
+    .auth-wrapper h1{font-size:1.8rem;margin-bottom:10px;color:var(--text-primary);} 
+    .auth-tabs{display:flex;gap:10px;margin:20px 0 30px;} 
+    .auth-tabs button{flex:1;padding:12px 0;border:1px solid var(--border-color);background:var(--bg-secondary);cursor:pointer;border-radius:12px;color:var(--text-primary);font-weight:600;transition:.25s;} 
+    .auth-tabs button.active, .auth-tabs button:hover{background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;box-shadow:0 4px 12px rgba(102,126,234,.4);} 
+    .auth-form{display:none;animation:fadeIn .4s ease;} 
+    .auth-form.active{display:block;} 
+    .auth-form .field{margin-bottom:18px;} 
+    .auth-form label{display:block;font-size:.85rem;font-weight:600;margin-bottom:6px;color:var(--text-secondary);} 
+    .auth-form input{width:100%;padding:12px 14px;border:1px solid var(--border-color);border-radius:10px;background:rgba(255,255,255,.6);outline:none;font-size:.95rem;transition:.25s;} 
+    [data-theme="dark"] .auth-form input{background:rgba(26,26,46,.6);} 
+    .auth-form input:focus{border-color:#667eea;box-shadow:0 0 0 3px rgba(102,126,234,.25);} 
+    .auth-submit{width:100%;padding:14px 0;border:none;border-radius:14px;background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;font-weight:600;font-size:1rem;cursor:pointer;transition:.25s;} 
+    .auth-submit:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(102,126,234,.45);} 
+    .auth-message{margin-top:18px;font-size:.85rem;text-align:center;} 
+    .auth-error{background:#ffe5e5;color:#b60000;padding:10px 14px;border-radius:10px;font-size:.8rem;margin-bottom:18px;display:none;} 
+    .auth-success{background:#e6ffed;color:#046c3f;padding:10px 14px;border-radius:10px;font-size:.8rem;margin-bottom:18px;display:none;} 
+    .back-home{display:inline-flex;align-items:center;gap:6px;margin-top:25px;color:#667eea;font-weight:600;text-decoration:none;} 
+    .back-home:hover{text-decoration:underline;} 
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="header-content">
+      <div>
+  <h1 class="logo"><i class="fas fa-plane-departure"></i> Travel AI Advisor</h1>
+  <p class="tagline">ログインして予約を管理</p>
+      </div>
+      <div class="auth-area"></div>
+    </div>
+  </header>
+  <main class="main">
+    <div class="container">
+      <div class="auth-wrapper">
+  <h1>アカウント</h1>
+        <div class="auth-tabs">
+          <button id="tabLogin" class="active">ログイン</button>
+            <button id="tabRegister">新規登録</button>
+        </div>
+        <div id="errorBox" class="auth-error"></div>
+        <div id="successBox" class="auth-success"></div>
+        <form id="loginForm" class="auth-form active">
+          <div class="field">
+            <label for="loginEmail">メールアドレス</label>
+            <input type="email" id="loginEmail" required />
+          </div>
+          <div class="field">
+            <label for="loginPassword">パスワード</label>
+            <input type="password" id="loginPassword" required />
+          </div>
+          <button class="auth-submit" type="submit">ログイン</button>
+        </form>
+        <form id="registerForm" class="auth-form">
+          <div class="field">
+            <label for="regEmail">メールアドレス</label>
+            <input type="email" id="regEmail" required />
+          </div>
+          <div class="field">
+            <label for="regPassword">パスワード</label>
+            <input type="password" id="regPassword" minlength="6" required />
+          </div>
+          <div class="field">
+            <label for="regPassword2">パスワード（確認）</label>
+            <input type="password" id="regPassword2" minlength="6" required />
+          </div>
+          <button class="auth-submit" type="submit">アカウント作成</button>
+        </form>
+  <a href="index.html" class="back-home"><i class="fas fa-arrow-left"></i> ホームへ戻る</a>
+      </div>
+    </div>
+  </main>
+  <script src="assets/js/auth.js"></script>
+  <script>
+    const tabLogin = document.getElementById('tabLogin');
+    const tabRegister = document.getElementById('tabRegister');
+    const loginForm = document.getElementById('loginForm');
+    const regForm = document.getElementById('registerForm');
+    const errorBox = document.getElementById('errorBox');
+    const successBox = document.getElementById('successBox');
+
+    function showError(msg){ errorBox.textContent = msg; errorBox.style.display='block'; successBox.style.display='none'; }
+    function showSuccess(msg){ successBox.textContent = msg; successBox.style.display='block'; errorBox.style.display='none'; }
+    function clearMsg(){ errorBox.style.display='none'; successBox.style.display='none'; }
+
+    tabLogin.addEventListener('click',()=>{ tabLogin.classList.add('active'); tabRegister.classList.remove('active'); loginForm.classList.add('active'); regForm.classList.remove('active'); clearMsg(); });
+    tabRegister.addEventListener('click',()=>{ tabRegister.classList.add('active'); tabLogin.classList.remove('active'); regForm.classList.add('active'); loginForm.classList.remove('active'); clearMsg(); });
+
+  loginForm.addEventListener('submit', e=>{ e.preventDefault(); clearMsg(); const email = loginEmail.value.trim(); const pw = loginPassword.value; const r = authAPI.loginUser(email,pw); if(!r.ok) return showError(r.message); showSuccess('ログイン成功'); setTimeout(()=>{ window.location.href='user.html'; },600); });
+
+  regForm.addEventListener('submit', e=>{ e.preventDefault(); clearMsg(); const email=regEmail.value.trim(); const p1=regPassword.value; const p2=regPassword2.value; if(p1!==p2) return showError('パスワードが一致しません'); if(p1.length<6) return showError('パスワードは6文字以上'); const r = authAPI.registerUser(email,p1); if(!r.ok) return showError(r.message); showSuccess('登録成功'); setTimeout(()=>{ window.location.href='user.html'; },800); });
+  </script>
+</body>
+</html>

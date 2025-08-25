@@ -26,6 +26,52 @@
     --shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
 }
 
+/* Dark mode specific overrides */
+[data-theme="dark"] .visual-option {
+    background: rgba(26, 26, 46, 0.8);
+    border-color: rgba(255, 255, 255, 0.2);
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] .season-name,
+[data-theme="dark"] .budget-name,
+[data-theme="dark"] .destination-name,
+[data-theme="dark"] .style-name {
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] .season-months,
+[data-theme="dark"] .budget-desc,
+[data-theme="dark"] .destination-desc,
+[data-theme="dark"] .style-desc {
+    color: var(--text-secondary);
+}
+
+[data-theme="dark"] .form-group label {
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] .recommendation-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+}
+
+[data-theme="dark"] .recommendation-title {
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] .recommendation-description {
+    color: var(--text-secondary);
+}
+
+[data-theme="dark"] .detail-item {
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] .recommendation-details {
+    background: rgba(0, 0, 0, 0.2);
+}
+
 body {
     font-family: 'Noto Sans JP', sans-serif;
     line-height: 1.6;
@@ -92,17 +138,43 @@ body::before {
     background: var(--bg-secondary);
     border: 1px solid var(--border-color);
     border-radius: 25px;
-    padding: 10px 15px;
+    padding: 12px 20px;
     cursor: pointer;
     transition: all 0.3s ease;
     color: var(--text-primary);
     backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 500;
+    font-size: 0.9rem;
 }
 
 .theme-toggle:hover {
     background: var(--border-color);
     transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
+
+.theme-toggle i {
+    font-size: 1rem;
+    transition: transform 0.3s ease;
+}
+
+.theme-toggle:hover i {
+    transform: rotate(20deg);
+}
+
+/* Auth area */
+.auth-area { min-width:140px; display:flex; align-items:center; justify-content:flex-end; }
+.auth-login-btn { background: var(--bg-secondary); border:1px solid var(--border-color); padding:8px 14px; border-radius:20px; color:var(--text-primary); font-size:.75rem; text-decoration:none; display:inline-flex; align-items:center; gap:6px; }
+.auth-login-btn:hover { background: var(--border-color); }
+.auth-logged { display:flex; align-items:center; gap:10px; }
+.auth-email { font-size:.7rem; color: var(--text-secondary); }
+.auth-link { font-size:.7rem; text-decoration:none; color:#667eea; font-weight:600; }
+.auth-link:hover { text-decoration:underline; }
+.auth-logout { background:#ff4d67; border:none; color:#fff; font-size:.65rem; padding:6px 10px; border-radius:14px; cursor:pointer; }
+.auth-logout:hover { filter:brightness(1.1); }
 
 @keyframes bounce {
     0%, 20%, 50%, 80%, 100% { transform: translateY(0); }

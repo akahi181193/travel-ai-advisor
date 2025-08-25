@@ -19,10 +19,13 @@
                 </h1>
                 <p class="tagline">あなたの理想の旅行先を見つけましょう ✨</p>
             </div>
-            <button class="theme-toggle" onclick="toggleTheme()" id="themeToggle">
-                <i class="fas fa-moon"></i>
-                <span>ダークモード</span>
-            </button>
+            <div style="display:flex; align-items:center; gap:12px;">
+                <button class="theme-toggle" id="themeToggle">
+                    <i class="fas fa-moon"></i>
+                    <span>ダークモード</span>
+                </button>
+                <div class="auth-area"></div>
+            </div>
         </div>
     </header>
 
@@ -204,6 +207,7 @@
         </button>
     </div>
 
+    <script src="assets/js/auth.js"></script>
     <script src="assets/js/script.js"></script>
 </body>
 </html>

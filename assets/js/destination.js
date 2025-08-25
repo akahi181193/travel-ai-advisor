@@ -36,47 +36,50 @@ function scrollToItinerary() {
 }
 
 // Plan selection and booking
-const planData = {
-    basic: {
-        name: 'ベーシックプラン',
-        price: 45000,
-        features: [
-            '2泊3日の宿泊',
-            '主要観光地入場料',
-            '交通費（京都・奈良）',
-            '朝食2回',
-            '旅行保険'
-        ]
-    },
-    premium: {
-        name: 'プレミアムプラン',
-        price: 68000,
-        features: [
-            '高級旅館での宿泊',
-            '全観光地入場料',
-            '専用車でのエスコート',
-            '京会席ディナー',
-            '着物レンタル',
-            '茶道体験'
-        ]
-    },
-    luxury: {
-        name: 'ラグジュアリープラン',
-        price: 120000,
-        features: [
-            '最高級リゾート宿泊',
-            'プライベートガイド',
-            '専用車チャーター',
-            'ミシュラン料理',
-            '特別文化体験',
-            '24時間コンシェルジュ'
-        ]
-    }
-};
+// Use existing planData defined inline per destination page if present
+if (!window.planData) {
+    window.planData = {
+        basic: {
+            name: 'ベーシックプラン',
+            price: 45000,
+            features: [
+                '2泊3日の宿泊',
+                '主要観光地入場料',
+                '交通費（京都・奈良）',
+                '朝食2回',
+                '旅行保険'
+            ]
+        },
+        premium: {
+            name: 'プレミアムプラン',
+            price: 68000,
+            features: [
+                '高級旅館での宿泊',
+                '全観光地入場料',
+                '専用車でのエスコート',
+                '京会席ディナー',
+                '着物レンタル',
+                '茶道体験'
+            ]
+        },
+        luxury: {
+            name: 'ラグジュアリープラン',
+            price: 120000,
+            features: [
+                '最高級リゾート宿泊',
+                'プライベートガイド',
+                '専用車チャーター',
+                'ミシュラン料理',
+                '特別文化体験',
+                '24時間コンシェルジュ'
+            ]
+        }
+    };
+}
 
 function selectPlan(planType) {
     selectedPlan = planType;
-    const plan = planData[planType];
+    const plan = window.planData[planType];
     
     // Update modal content
     document.getElementById('selectedPlanName').textContent = plan.name;
@@ -101,7 +104,7 @@ function closeModal() {
 function updatePricing() {
     if (!selectedPlan) return;
     
-    const plan = planData[selectedPlan];
+    const plan = window.planData[selectedPlan];
     const travelers = parseInt(document.getElementById('travelers').value) || 2;
     const planTotal = plan.price * travelers;
     const taxRate = 0.1;
@@ -173,8 +176,8 @@ document.addEventListener('DOMContentLoaded', function() {
         shareBtn.addEventListener('click', function() {
             if (navigator.share) {
                 navigator.share({
-                    title: '京都・奈良 桜の古都めぐり',
-                    text: '春の京都・奈良旅行プランをチェック！',
+                    title: document.title,
+                    text: (document.querySelector('.destination-subtitle')?.textContent || document.title).trim(),
                     url: window.location.href
                 });
             } else {
@@ -229,22 +232,28 @@ function handleBookingSubmission(e) {
     
     // Simulate booking process
     setTimeout(() => {
-        // Reset button
-        submitBtn.innerHTML = originalText;
-        submitBtn.disabled = false;
-        
-        // Show success
-        showBookingSuccess();
-        
-        // Close modal
-        closeModal();
-    }, 3000);
+        try {
+            // Reset button
+            submitBtn.innerHTML = originalText;
+            submitBtn.disabled = false;
+            // Show success
+            showBookingSuccess();
+            // Close modal
+            closeModal();
+        } catch(err) {
+            submitBtn.innerHTML = originalText;
+            submitBtn.disabled = false;
+            console.error('Booking success render error:', err);
+            alert('予約完了の表示中にエラーが発生しましたが、データは保存されています。');
+        }
+    }, 1500);
 }
 
 function showBookingSuccess() {
     // Create success modal
     const successModal = document.createElement('div');
     successModal.className = 'modal show';
+    const homePath = location.pathname.includes('/pages/') ? '../../index.html' : 'index.html';
     successModal.innerHTML = `
         <div class="modal-content" style="text-align: center; max-width: 500px;">
             <div class="modal-body">
@@ -266,7 +275,7 @@ function showBookingSuccess() {
                     <button class="btn-secondary" onclick="this.closest('.modal').remove()">
                         閉じる
                     </button>
-                    <button class="btn-primary" onclick="window.location.href='index.html'">
+                    <button class="btn-primary" onclick="window.location.href='${homePath}'">
                         ホームに戻る
                     </button>
                 </div>
@@ -275,6 +284,35 @@ function showBookingSuccess() {
     `;
     
     document.body.appendChild(successModal);
+
+    // Persist booking if user logged in (auth.js available)
+    try {
+        const auth = window.authAPI;
+        if (auth) {
+            const user = auth.getCurrentUser();
+            if (user && selectedPlan) {
+                const plan = window.planData[selectedPlan];
+                const travelersEl = document.getElementById('travelers');
+                const startDateEl = document.getElementById('startDate');
+                const booking = {
+                    id: 'b_' + Date.now(),
+                    plan: plan.name,
+                    destination: document.title.replace('|','').trim(),
+                    startDate: startDateEl ? startDateEl.value : null,
+                    travelers: travelersEl ? travelersEl.value : null,
+                    pricePerPerson: plan.price,
+                    total: (plan.price * (parseInt(travelersEl ? travelersEl.value : '1')||1) * 1.1),
+                    payment: (document.querySelector('input[name="paymentMethod"]:checked')||{}).value || null,
+                    createdAt: new Date().toISOString()
+                };
+                // Use exposed save function
+                const key = 'bookings_' + user.id;
+                const list = JSON.parse(localStorage.getItem(key) || '[]');
+                list.push(booking);
+                localStorage.setItem(key, JSON.stringify(list));
+            }
+        }
+    } catch (e) { /* ignore demo errors */ }
     
     // Auto remove after 10 seconds
     setTimeout(() => {
