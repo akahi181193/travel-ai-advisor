@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>札幌・小樽 雪祭り冬の旅 | 旅行AIアドバイザー</title>
+    <link rel="stylesheet" href="../../assets/css/styles.css">
+    <link rel="stylesheet" href="../../assets/css/destination.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <a href="../../index.html" class="nav-back">
+                    <i class="fas fa-arrow-left"></i>
+                    戻る
+                </a>
+                <h1 class="logo-small">
+                    <i class="fas fa-plane-departure"></i>
+                    旅行AIアドバイザー
+                </h1>
+                <div class="nav-actions">
+                    <button class="btn-favorite">
+                        <i class="far fa-heart"></i>
+                    </button>
+                    <button class="btn-share">
+                        <i class="fas fa-share"></i>
+                    </button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="destination-main">
+        <!-- Hero Section -->
+        <section class="destination-hero">
+            <div class="hero-image-slider">
+                <div class="hero-slide active" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('data:image/svg+xml,<svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 800 400&quot;><rect width=&quot;800&quot; height=&quot;400&quot; fill=&quot;%235F9EA0&quot;/><text x=&quot;400&quot; y=&quot;200&quot; text-anchor=&quot;middle&quot; font-size=&quot;60&quot; fill=&quot;white&quot;>❄️ 雪祭り</text></svg>')">
+                </div>
+                <div class="hero-slide" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('data:image/svg+xml,<svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 800 400&quot;><rect width=&quot;800&quot; height=&quot;400&quot; fill=&quot;%236495ED&quot;/><text x=&quot;400&quot; y=&quot;200&quot; text-anchor=&quot;middle&quot; font-size=&quot;60&quot; fill=&quot;white&quot;>🏔️ 小樽運河</text></svg>')">
+                </div>
+                <div class="hero-slide" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('data:image/svg+xml,<svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 800 400&quot;><rect width=&quot;800&quot; height=&quot;400&quot; fill=&quot;%23483D8B&quot;/><text x=&quot;400&quot; y=&quot;200&quot; text-anchor=&quot;middle&quot; font-size=&quot;60&quot; fill=&quot;white&quot;>🦀 海鮮グルメ</text></svg>')">
+                </div>
+            </div>
+            <div class="hero-content">
+                <div class="destination-badge">
+                    <i class="fas fa-snowflake"></i>
+                    冬の特別プラン
+                </div>
+                <h1 class="destination-title">❄️ 札幌・小樽 雪と光の祭典</h1>
+                <p class="destination-subtitle">雪祭りと絶品グルメを楽しむ3日間の冬旅</p>
+                <div class="hero-info">
+                    <div class="info-item">
+                        <i class="fas fa-calendar"></i>
+                        <span>2月上旬〜中旬</span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-yen-sign"></i>
+                        <span>¥52,000〜</span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-clock"></i>
+                        <span>2泊3日</span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-users"></i>
+                        <span>1〜4名</span>
+                    </div>
+                </div>
+                <div class="hero-actions">
+                    <button class="btn-primary" onclick="scrollToBooking()">
+                        <i class="fas fa-credit-card"></i>
+                        今すぐ予約
+                    </button>
+                    <button class="btn-secondary" onclick="scrollToItinerary()">
+                        <i class="fas fa-list"></i>
+                        詳細を見る
+                    </button>
+                </div>
+            </div>
+            <div class="slider-controls">
+                <button class="slider-btn prev" onclick="changeSlide(-1)">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="slider-btn next" onclick="changeSlide(1)">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- Overview Section -->
+        <section class="destination-overview">
+            <div class="container">
+                <div class="overview-grid">
+                    <div class="overview-text">
+                        <h2>北海道冬の魅力</h2>
+                        <p>さっぽろ雪まつりは北海道を代表する冬の祭典。巨大な雪氷像とライトアップが幻想的な世界を創り出し、小樽運河の雪景色と新鮮な海の幸が旅の醍醐味をさらに深めます。</p>
+                        <div class="highlights-grid">
+                            <div class="highlight-item">
+                                <i class="fas fa-snowman"></i>
+                                <h4>さっぽろ雪まつり</h4>
+                                <p>大通公園の巨大雪氷像とすすきの氷まつり</p>
+                            </div>
+                            <div class="highlight-item">
+                                <i class="fas fa-ship"></i>
+                                <h4>小樽運河</h4>
+                                <p>ガス灯に照らされたロマンチックな運河</p>
+                            </div>
+                            <div class="highlight-item">
+                                <i class="fas fa-utensils"></i>
+                                <h4>北海道グルメ</h4>
+                                <p>新鮮な海鮮、ジンギスカン、スープカレー</p>
+                            </div>
+                            <div class="highlight-item">
+                                <i class="fas fa-hot-tub"></i>
+                                <h4>温泉</h4>
+                                <p>定山渓温泉で雪見風呂を満喫</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="overview-media">
+                        <div class="media-gallery">
+                            <div class="media-item large">
+                                <div class="media-placeholder" style="background: linear-gradient(135deg, #5F9EA0, #4682B4);">
+                                    <i class="fas fa-snowflake" style="font-size: 3rem; color: white;"></i>
+                                    <p>雪まつり</p>
+                                </div>
+                            </div>
+                            <div class="media-item">
+                                <div class="media-placeholder" style="background: linear-gradient(135deg, #6495ED, #4169E1);">
+                                    <i class="fas fa-ship" style="font-size: 2rem; color: white;"></i>
+                                    <p>小樽運河</p>
+                                </div>
+                            </div>
+                            <div class="media-item">
+                                <div class="media-placeholder" style="background: linear-gradient(135deg, #483D8B, #8A2BE2);">
+                                    <i class="fas fa-fish" style="font-size: 2rem; color: white;"></i>
+                                    <p>海鮮市場</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Itinerary Section -->
+        <section id="itinerary" class="itinerary-section">
+            <div class="container">
+                <h2 class="section-title">
+                    <i class="fas fa-route"></i>
+                    詳細な旅程表
+                </h2>
+                <div class="itinerary-timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-marker">1</div>
+                        <div class="timeline-content">
+                            <h3>1日目：札幌到着・雪まつり</h3>
+                            <div class="timeline-schedule">
+                                <div class="schedule-item">
+                                    <span class="time">10:00</span>
+                                    <div class="activity">
+                                        <i class="fas fa-plane"></i>
+                                        <div>
+                                            <h4>新千歳空港到着</h4>
+                                            <p>JR快速エアポートで札幌駅へ</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="schedule-item">
+                                    <span class="time">12:00</span>
+                                    <div class="activity">
+                                        <i class="fas fa-utensils"></i>
+                                        <div>
+                                            <h4>札幌駅でランチ</h4>
+                                            <p>海鮮丼とスープカレー</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="schedule-item">
+                                    <span class="time">14:00</span>
+                                    <div class="activity">
+                                        <i class="fas fa-snowman"></i>
+                                        <div>
+                                            <h4>大通公園雪まつり会場</h4>
+                                            <p>大雪像見学とスナップ撮影</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="schedule-item">
+                                    <span class="time">16:30</span>
+                                    <div class="activity">
+                                        <i class="fas fa-shopping-bag"></i>
+                                        <div>
+                                            <h4>すすきの散策</h4>
+                                            <p>氷の彫刻とお土産ショッピング</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="schedule-item">
+                                    <span class="time">18:00</span>
+                                    <div class="activity">
+                                        <i class="fas fa-hotel"></i>
+                                        <div>
+                                            <h4>ホテルチェックイン</h4>
+                                            <p>すすきの地区のシティホテル</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="schedule-item">
+                                    <span class="time">19:30</span>
+                                    <div class="activity">
+                                        <i class="fas fa-wine-glass"></i>
+                                        <div>
+                                            <h4>夜のすすきのグルメ</h4>
+                                            <p>ジンギスカンと地ビール</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-marker">2</div>
+                        <div class="timeline-content">
+                            <h3>2日目：小樽・定山渓</h3>
+                            <div class="timeline-schedule">
+                                <div class="schedule-item">
+                                    <span class="time">09:00</span>
+                                    <div class="activity">
+                                        <i class="fas fa-train"></i>
+                                        <div>
+                                            <h4>小樽へ移動</h4>
+                                            <p>JR函館本線で小樽駅まで</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="schedule-item">
+                                    <span class="time">10:00</span>
+                                    <div class="activity">
+                                        <i class="fas fa-ship"></i>
+                                        <div>
+                                            <h4>小樽運河散策</h4>
+                                            <p>雪化粧した運河とガス灯</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="schedule-item">
+                                    <span class="time">11:30</span>
+                                    <div class="activity">
+                                        <i class="fas fa-warehouse"></i>
+                                        <div>
+                                            <h4>小樽オルゴール堂</h4>
+                                            <p>ガラス工芸品とオルゴール見学</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="schedule-item">
+                                    <span class="time">13:00</span>
+                                    <div class="activity">
+                                        <i class="fas fa-fish"></i>
+                                        <div>
+                                            <h4>小樽朝市</h4>
+                                            <p>新鮮な海鮮丼ランチ</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="schedule-item">
+                                    <span class="time">15:00</span>
+                                    <div class="activity">
+                                        <i class="fas fa-bus"></i>
+                                        <div>
+                                            <h4>定山渓温泉へ</h4>
+                                            <p>バスで温泉街まで移動</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="schedule-item">
+                                    <span class="time">17:00</span>
+                                    <div class="activity">
+                                        <i class="fas fa-hot-tub"></i>
+                                        <div>
+                                            <h4>温泉旅館</h4>
+                                            <p>雪見露天風呂と会席料理</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-marker">3</div>
+                        <div class="timeline-content">
+                            <h3>3日目：札幌市内・出発</h3>
+                            <div class="timeline-schedule">
+                                <div class="schedule-item">
+                                    <span class="time">09:00</span>
+                                    <div class="activity">
+                                        <i class="fas fa-utensils"></i>
+                                        <div>
+                                            <h4>旅館で朝食</h4>
+                                            <p>北海道の恵みを詰め込んだ和朝食</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="schedule-item">
+                                    <span class="time">11:00</span>
+                                    <div class="activity">
+                                        <i class="fas fa-city"></i>
+                                        <div>
+                                            <h4>札幌市内観光</h4>
+                                            <p>時計台・赤れんが庁舎見学</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="schedule-item">
+                                    <span class="time">13:00</span>
+                                    <div class="activity">
+                                        <i class="fas fa-shopping-cart"></i>
+                                        <div>
+                                            <h4>二条市場</h4>
+                                            <p>海鮮ランチとお土産購入</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="schedule-item">
+                                    <span class="time">15:00</span>
+                                    <div class="activity">
+                                        <i class="fas fa-store"></i>
+                                        <div>
+                                            <h4>狸小路商店街</h4>
+                                            <p>最後のお土産ショッピング</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="schedule-item">
+                                    <span class="time">16:30</span>
+                                    <div class="activity">
+                                        <i class="fas fa-plane"></i>
+                                        <div>
+                                            <h4>新千歳空港へ</h4>
+                                            <p>JR快速エアポートで空港へ</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="schedule-item">
+                                    <span class="time">19:00</span>
+                                    <div class="activity">
+                                        <i class="fas fa-home"></i>
+                                        <div>
+                                            <h4>東京へ出発</h4>
+                                            <p>フライトで帰路につく</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pricing Section -->
+        <section id="booking" class="pricing-section">
+            <div class="container">
+                <h2 class="section-title">
+                    <i class="fas fa-tags"></i>
+                    料金プラン
+                </h2>
+                <div class="pricing-grid">
+                    <div class="pricing-card basic">
+                        <div class="pricing-header">
+                            <h3>ベーシックプラン</h3>
+                            <div class="price">
+                                <span class="currency">¥</span>
+                                <span class="amount">52,000</span>
+                                <span class="period">/ 人</span>
+                            </div>
+                        </div>
+                        <div class="pricing-features">
+                            <div class="feature">
+                                <i class="fas fa-check"></i>
+                                <span>2泊3日の宿泊</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-check"></i>
+                                <span>往復航空券</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-check"></i>
+                                <span>雪まつり会場入場</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-check"></i>
+                                <span>朝食2回</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-check"></i>
+                                <span>市内交通費</span>
+                            </div>
+                        </div>
+                        <button class="btn-plan" onclick="selectPlan('basic')">
+                            プランを選択
+                        </button>
+                    </div>
+                    
+                    <div class="pricing-card premium recommended">
+                        <div class="recommended-badge">おすすめ</div>
+                        <div class="pricing-header">
+                            <h3>プレミアムプラン</h3>
+                            <div class="price">
+                                <span class="currency">¥</span>
+                                <span class="amount">85,000</span>
+                                <span class="period">/ 人</span>
+                            </div>
+                        </div>
+                        <div class="pricing-features">
+                            <div class="feature">
+                                <i class="fas fa-check"></i>
+                                <span>高級ホテル・温泉旅館</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-check"></i>
+                                <span>往復航空券（プレミアム席）</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-check"></i>
+                                <span>全観光地入場券</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-check"></i>
+                                <span>海鮮グルメディナー</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-check"></i>
+                                <span>専用バス送迎</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-check"></i>
+                                <span>温泉入浴券</span>
+                            </div>
+                        </div>
+                        <button class="btn-plan premium-btn" onclick="selectPlan('premium')">
+                            プランを選択
+                        </button>
+                    </div>
+                    
+                    <div class="pricing-card luxury">
+                        <div class="pricing-header">
+                            <h3>ラグジュアリープラン</h3>
+                            <div class="price">
+                                <span class="currency">¥</span>
+                                <span class="amount">150,000</span>
+                                <span class="period">/ 人</span>
+                            </div>
+                        </div>
+                        <div class="pricing-features">
+                            <div class="feature">
+                                <i class="fas fa-check"></i>
+                                <span>5つ星ホテル・最高級旅館</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-check"></i>
+                                <span>プライベートガイド</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-check"></i>
+                                <span>専用車チャーター</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-check"></i>
+                                <span>特別室・専用露天風呂</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-check"></i>
+                                <span>高級懐石料理コース</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-check"></i>
+                                <span>24時間コンシェルジュ</span>
+                            </div>
+                        </div>
+                        <button class="btn-plan" onclick="selectPlan('luxury')">
+                            プランを選択
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Booking Modal -->
+    <div id="bookingModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>予約手続き</h2>
+                <button class="modal-close" onclick="closeModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="booking-form">
+                    <div class="selected-plan">
+                        <h3 id="selectedPlanName"></h3>
+                        <div class="plan-price" id="selectedPlanPrice"></div>
+                    </div>
+                    
+                    <form id="bookingForm">
+                        <div class="form-section">
+                            <h4><i class="fas fa-calendar"></i> 旅行日程</h4>
+                            <div class="form-group">
+                                <label for="startDate">出発日：</label>
+                                <input type="date" id="startDate" name="startDate" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="travelers">人数：</label>
+                                <select id="travelers" name="travelers" required>
+                                    <option value="1">1名</option>
+                                    <option value="2" selected>2名</option>
+                                    <option value="3">3名</option>
+                                    <option value="4">4名</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-section">
+                            <h4><i class="fas fa-user"></i> お客様情報</h4>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="lastName">姓：</label>
+                                    <input type="text" id="lastName" name="lastName" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="firstName">名：</label>
+                                    <input type="text" id="firstName" name="firstName" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">メールアドレス：</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">電話番号：</label>
+                                <input type="tel" id="phone" name="phone" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-section">
+                            <h4><i class="fas fa-credit-card"></i> お支払い情報</h4>
+                            <div class="payment-methods">
+                                <div class="payment-method">
+                                    <input type="radio" id="credit" name="paymentMethod" value="credit" checked>
+                                    <label for="credit">
+                                        <i class="fas fa-credit-card"></i>
+                                        クレジットカード
+                                    </label>
+                                </div>
+                                <div class="payment-method">
+                                    <input type="radio" id="bank" name="paymentMethod" value="bank">
+                                    <label for="bank">
+                                        <i class="fas fa-university"></i>
+                                        銀行振込
+                                    </label>
+                                </div>
+                                <div class="payment-method">
+                                    <input type="radio" id="paypal" name="paymentMethod" value="paypal">
+                                    <label for="paypal">
+                                        <i class="fab fa-paypal"></i>
+                                        PayPal
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div id="creditCardForm" class="credit-form">
+                                <div class="form-group">
+                                    <label for="cardNumber">カード番号：</label>
+                                    <input type="text" id="cardNumber" name="cardNumber" placeholder="1234 5678 9012 3456">
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="expiry">有効期限：</label>
+                                        <input type="text" id="expiry" name="expiry" placeholder="MM/YY">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="cvv">CVV：</label>
+                                        <input type="text" id="cvv" name="cvv" placeholder="123">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="cardName">カード名義：</label>
+                                    <input type="text" id="cardName" name="cardName">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="booking-summary">
+                            <div class="summary-item">
+                                <span>プラン料金：</span>
+                                <span id="planTotal"></span>
+                            </div>
+                            <div class="summary-item">
+                                <span>税金：</span>
+                                <span id="taxAmount"></span>
+                            </div>
+                            <div class="summary-item total">
+                                <span>合計金額：</span>
+                                <span id="totalAmount"></span>
+                            </div>
+                        </div>
+                        
+                        <div class="form-actions">
+                            <button type="button" class="btn-secondary" onclick="closeModal()">
+                                キャンセル
+                            </button>
+                            <button type="submit" class="btn-primary">
+                                <i class="fas fa-lock"></i>
+                                予約を確定する
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Sapporo-specific plan data
+        const planData = {
+            basic: {
+                name: 'ベーシックプラン',
+                price: 52000,
+                features: [
+                    '2泊3日の宿泊',
+                    '往復航空券',
+                    '雪まつり会場入場',
+                    '朝食2回',
+                    '市内交通費'
+                ]
+            },
+            premium: {
+                name: 'プレミアムプラン',
+                price: 85000,
+                features: [
+                    '高級ホテル・温泉旅館',
+                    '往復航空券（プレミアム席）',
+                    '全観光地入場券',
+                    '海鮮グルメディナー',
+                    '専用バス送迎',
+                    '温泉入浴券'
+                ]
+            },
+            luxury: {
+                name: 'ラグジュアリープラン',
+                price: 150000,
+                features: [
+                    '5つ星ホテル・最高級旅館',
+                    'プライベートガイド',
+                    '専用車チャーター',
+                    '特別室・専用露天風呂',
+                    '高級懐石料理コース',
+                    '24時間コンシェルジュ'
+                ]
+            }
+        };
+    </script>
+    <script src="../../assets/js/destination.js"></script>
+</body>
+</html>
